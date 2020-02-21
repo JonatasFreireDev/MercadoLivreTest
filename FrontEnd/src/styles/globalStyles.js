@@ -1,6 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 
-import { grey } from '~/styles/colors';
+import { grey_light } from '~/styles/colors';
 
 export default createGlobalStyle`
    *{
@@ -10,7 +10,7 @@ export default createGlobalStyle`
       box-sizing: border-box;
    }
    body{
-      background: ${grey};
+      background: ${grey_light};
       -webkit-font-smoothing: antialiased;
    }
    body, input, button{
