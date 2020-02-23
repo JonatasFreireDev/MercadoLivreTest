@@ -1,5 +1,5 @@
-import styled from 'styled-components';
 import { darken } from 'polished';
+import styled from 'styled-components';
 
 import { yellow, grey_black, grey_light } from '~/styles/colors';
 
@@ -14,6 +14,7 @@ export const Container = styled.div`
       height: 100%;
       max-width: 1020px;
       align-items: center;
+      padding: 0 20px;
 
       a {
          display: flex;

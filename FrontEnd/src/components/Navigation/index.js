@@ -1,6 +1,6 @@
 import React from 'react';
-
 import { MdKeyboardArrowRight } from 'react-icons/md';
+
 import { Container } from './styles';
 
 const paths = ['Eletronica', 'Ipod', 'Repro', 'Ipod Touch', '32 gb'];

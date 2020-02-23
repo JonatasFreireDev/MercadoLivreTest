@@ -1,9 +1,10 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import Routes from './routes';
-import GlobalStyle from '~/styles/globalStyles';
 
 import Header from '~/components/Header';
+import GlobalStyle from '~/styles/globalStyles';
+
+import Routes from './routes';
 
 function App() {
    return (

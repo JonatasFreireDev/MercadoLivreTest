@@ -1,7 +1,13 @@
 import React from 'react';
 
+import { MainContainer } from '~/components/MainContainer/styles';
+import Navigation from '~/components/Navigation';
 // import { Container } from './styles';
 
 export default function Search() {
-   return <h1>Sear</h1>;
+   return (
+      <MainContainer>
+         <Navigation />
+      </MainContainer>
+   );
 }

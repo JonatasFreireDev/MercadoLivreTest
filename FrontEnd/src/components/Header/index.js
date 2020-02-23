@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { Container } from './styles';
-
+import search from '~/assets/ic_Search.png';
 import Logo from '~/assets/Logo_ML.png';
-import Search from '~/assets/ic_Search.png';
+
+import { Container } from './styles';
 
 export default function Header() {
    return (
@@ -16,8 +16,8 @@ export default function Header() {
             <form>
                <div>
                   <input type="text" placeholder="Buscar..." />
-                  <button>
-                     <img src={Search} alt="Search" />
+                  <button type="button">
+                     <img src={search} alt="Search" />
                   </button>
                </div>
             </form>

@@ -10,6 +10,7 @@ export default createGlobalStyle`
       box-sizing: border-box;
    }
    body{
+      overflow-x: hidden;
       background: ${grey_light};
       -webkit-font-smoothing: antialiased;
    }
@@ -22,4 +23,9 @@ export default createGlobalStyle`
    button{
       cursor: pointer;
    }
+   hr{
+      opacity: 0.2;
+      border-color: ${grey_light};
+      margin: 0 25px;
+      color: red;
 `;
