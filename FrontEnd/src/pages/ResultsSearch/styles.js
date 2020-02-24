@@ -6,17 +6,24 @@ export const Container = styled.div`
    background: ${white};
    border-radius: 4px;
    margin-bottom: 50px;
+
+   a {
+      text-decoration: none;
+
+      &:active,
+      &:focus,
+      &:visited {
+         color: black;
+      }
+
+      &: ;
+   }
 `;
 
-export const Product = styled.a`
+export const Product = styled.div`
    display: flex;
    padding: 16px;
    transition: all 0.2s;
-   text-decoration: none;
-
-   &:active {
-      color: ${grey};
-   }
 
    &:hover {
       transform: scale(1.02);
@@ -24,6 +31,7 @@ export const Product = styled.a`
 
    img {
       width: 180px;
+      height: 180px;
       border-radius: 4px;
    }
 
@@ -45,6 +53,7 @@ export const Product = styled.a`
          img {
             margin: 0 10px;
             width: 25px;
+            height: 25px;
          }
       }
    }
@@ -52,6 +61,7 @@ export const Product = styled.a`
    small {
       font-size: 12px;
       margin-top: 33px;
+      color: ${grey};
    }
 `;
 

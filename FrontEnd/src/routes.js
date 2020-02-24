@@ -1,9 +1,9 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import Search from '~/pages/Search';
-import ResultsSearch from '~/pages/ResultsSearch';
 import ProductDetail from '~/pages/ProductDetail';
+import ResultsSearch from '~/pages/ResultsSearch';
+import Search from '~/pages/Search';
 
 export default function Routes() {
    return (

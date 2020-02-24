@@ -14,7 +14,7 @@ export const Container = styled.div`
       height: 100%;
       max-width: 1020px;
       align-items: center;
-      padding: 0 20px;
+      padding: 0 50px;
 
       a {
          display: flex;
