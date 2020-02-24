@@ -4,48 +4,66 @@ import styled from 'styled-components';
 import { white, blue, grey } from '~/styles/colors';
 
 export const Container = styled.div`
+   min-width: 200px;
    display: flex;
    background: ${white};
    flex-direction: row;
    margin-bottom: 50px;
    border-radius: 4px;
 
-   div {
-      max-width: 680px;
+   @media (max-width: 600px) {
+      flex-direction: column;
+   }
+`;
 
-      img {
-         border-top-left-radius: 4px;
-         width: 680px;
-         height: 680px;
+export const Detail = styled.div`
+   width: 70%;
+   order: 1;
 
-         @media (max-width: 800px) {
-            width: 40vw;
-            height: 40vh;
-         }
+   @media (max-width: 600px) {
+      width: 100%;
+   }
+
+   img {
+      border-top-left-radius: 4px;
+      width: 100%;
+      max-width: 560px;
+   }
+
+   section {
+      margin: 32px 0;
+      padding-left: 32px;
+
+      strong {
+         font-size: 28px;
       }
 
-      section {
-         margin: 32px 0;
-         padding-left: 32px;
+      p {
+         color: ${grey};
+         font-size: 16px;
+         padding: 32px 0;
 
-         strong {
-            font-size: 28px;
-         }
-
-         p {
-            color: ${grey};
-            font-size: 16px;
-            padding: 32px 0;
+         @media (max-width: 600px) {
+            margin: auto;
+            padding: 15px;
          }
       }
    }
 `;
 
 export const Buy = styled.div`
+   order: 2;
    display: flex;
    flex-direction: column;
+   width: 30%;
    margin-right: 32px;
    margin-top: 32px;
+
+   @media (max-width: 600px) {
+      margin: auto;
+      width: 100%;
+      padding: 15px;
+   }
 
    small {
       font-size: 14px;
@@ -71,5 +89,18 @@ export const Buy = styled.div`
       &:hover {
          background: ${darken(0.03, blue)};
       }
+   }
+`;
+
+export const Price = styled.div`
+   display: flex;
+   align-items: center;
+
+   span {
+      margin-right: 10px;
+   }
+
+   small {
+      font-weight: bold;
    }
 `;

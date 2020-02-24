@@ -1,38 +1,100 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
+import PropTypes from 'prop-types';
+
+import ErrorMessage from '~/components/ErrorMessage';
+import Loading from '~/components/Loading';
 import { MainContainer } from '~/components/MainContainer/styles';
 import Navigation from '~/components/Navigation';
+import api from '~/services/api';
 
-import { Container, Buy } from './styles';
+import { Container, Detail, Buy, Price } from './styles';
 
-const products = {
-   id: 0,
-   image: 'https://api.adorable.io/avatars/103/abott@adorable.png',
-   price: 1023,
-   description:
-      'Some text Some text Sasdome text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text ',
-   local: 'Capital federal',
-};
+export default function ProductDetail({ match }) {
+   const [product, setProduct] = useState({});
+   const [isloading, setIsLoading] = useState(true);
+   const [failure, setFailure] = useState({ status: false, message: '' });
 
-export default function ProductDetail() {
+   useEffect(() => {
+      const { id } = match.params;
+
+      async function loadProduct() {
+         try {
+            const resp = await api.get(`/items/${id}`).catch(() => {
+               throw new Error('Não foi encontrado o produto');
+            });
+
+            const { author, item } = resp.data;
+            setProduct({ author, item });
+            setIsLoading(false);
+         } catch (err) {
+            setFailure({ status: true, message: err.message });
+            setIsLoading(false);
+         }
+      }
+
+      loadProduct();
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+   }, []);
+
+   function renderError() {
+      return <ErrorMessage message={failure.message} />;
+   }
+
+   function renderLoading() {
+      return <Loading />;
+   }
+
+   function renderPrice(value = 1980, type = '$') {
+      return (
+         <Price>
+            <span>{type}</span>
+            {value.toLocaleString('pt-BR')}
+            <small>00</small>
+         </Price>
+      );
+   }
+
+   function renderProduct(p) {
+      return (
+         <>
+            <Detail>
+               <img src={p.item.picture} alt={p.item.title} />
+               <section>
+                  <strong>Detalhes do Produto</strong>
+                  <p>{p.item.description}</p>
+               </section>
+            </Detail>
+            <Buy>
+               <small>
+                  {p.item.condition} - {p.item.sold_quantity} vendidos
+               </small>
+               <strong>{p.item.title}</strong>
+               <p>{renderPrice(p.item.price.decimals)}</p>
+               <button type="button">Comprar</button>
+            </Buy>
+         </>
+      );
+   }
+
    return (
       <MainContainer>
          <Navigation />
          <Container>
-            <div>
-               <img src={products.image} alt={products.description} />
-               <section>
-                  <strong>Detalhes do Produto</strong>
-                  <p>{products.description}</p>
-               </section>
-            </div>
-            <Buy>
-               <small>novo - 123 vendidos</small>
-               <strong>Deco Reverse Sombrero Oxford</strong>
-               <p>1980</p>
-               <button type="button">Comprar</button>
-            </Buy>
+            {failure.status
+               ? renderError()
+               : isloading
+               ? renderLoading()
+               : renderProduct(product)}
          </Container>
       </MainContainer>
    );
 }
+
+ProductDetail.propTypes = {
+   match: PropTypes.shape({
+      params: PropTypes.shape({
+         id: PropTypes.string.isRequired,
+      }),
+   }),
+};

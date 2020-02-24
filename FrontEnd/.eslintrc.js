@@ -39,8 +39,10 @@ module.exports = {
       'no-underscore-dangle': 'off',
       camelcase: 'off',
       'no-console': ['error', { allow: ['tron'] }],
+      'react/require-default-props': ['off'],
       'react-hooks/rules-of-hooks': 'error',
       'react-hooks/exhaustive-deps': 'warn',
+      'no-nested-ternary': ['off'],
       'import-helpers/order-imports': [
          'warn',
          {
