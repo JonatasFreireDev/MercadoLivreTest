@@ -21,7 +21,7 @@ export default function ProductDetail({ match }) {
       async function loadProduct() {
          try {
             const resp = await api.get(`/items/${id}`).catch(() => {
-               throw new Error('Não foi encontrado o produto');
+               throw new Error('Produto não encontrado');
             });
 
             const { author, item } = resp.data;
@@ -45,7 +45,7 @@ export default function ProductDetail({ match }) {
       return <Loading />;
    }
 
-   function renderPrice(value = 1980, type = '$') {
+   function renderPrice(value, type = '$') {
       return (
          <Price>
             <span>{type}</span>
