@@ -37,13 +37,14 @@ class ItemController {
          const { plain_text } = description.data;
          const picture = pictures[0].url;
 
-         const resp_seller = await api.get(`/users/${seller_id}`).catch(() => {
-            throw new Error('Id seller does not found');
+         const [resp_seller, categ] = await Promise.all([
+            api.get(`/users/${seller_id}`),
+            api.get(`/categories/${category_id}`),
+         ]).catch(() => {
+            throw new Error('Id does not found');
          });
 
-         if (!resp_seller) {
-            throw new Error('Id seller does not exists');
-         }
+         const [...namePaths] = categ.data.path_from_root;
 
          const [name, lastname] = getPartialName(resp_seller.data.nickname);
 
@@ -60,6 +61,7 @@ class ItemController {
                   amount: available_quantity,
                   decimals: price,
                },
+               path: namePaths.map(namePath => namePath.name),
                picture,
                condition,
                free_shipping,
