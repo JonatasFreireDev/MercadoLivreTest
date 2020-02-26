@@ -17,6 +17,10 @@ export const Container = styled.div`
 `;
 
 export const Detail = styled.div`
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
    width: 70%;
    order: 1;
 
@@ -26,13 +30,29 @@ export const Detail = styled.div`
 
    img {
       border-top-left-radius: 4px;
+      padding: 15px;
       width: 100%;
-      max-width: 560px;
+      max-width: 400px;
+
+      @media (max-width: 600px) {
+         padding: 5px;
+         width: 80%;
+      }
    }
 
    section {
       margin: 32px 0;
       padding-left: 32px;
+
+      @media (max-width: 600px) {
+         display: flex;
+         flex-direction: column;
+         justify-content: center;
+         align-items: center;
+         margin: 0;
+         width: 100%;
+         padding: 20px;
+      }
 
       strong {
          font-size: 28px;
@@ -42,11 +62,6 @@ export const Detail = styled.div`
          color: ${grey};
          font-size: 16px;
          padding: 32px 0;
-
-         @media (max-width: 600px) {
-            margin: auto;
-            padding: 15px;
-         }
       }
    }
 `;
@@ -63,6 +78,7 @@ export const Buy = styled.div`
       margin: auto;
       width: 100%;
       padding: 15px;
+      text-align: center;
    }
 
    small {
@@ -92,8 +108,7 @@ export const Buy = styled.div`
    }
 `;
 
-export const Price = styled.div`
-   display: flex;
+export const Price = styled.p`
    align-items: center;
 
    span {

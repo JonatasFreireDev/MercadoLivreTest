@@ -26,6 +26,7 @@ export default function ProductDetail({ match }) {
 
             const { author, item } = resp.data;
             setProduct({ author, item });
+
             setIsLoading(false);
          } catch (err) {
             setFailure({ status: true, message: err.message });
@@ -58,35 +59,35 @@ export default function ProductDetail({ match }) {
    function renderProduct(p) {
       return (
          <>
-            <Detail>
-               <img src={p.item.picture} alt={p.item.title} />
-               <section>
-                  <strong>Detalhes do Produto</strong>
-                  <p>{p.item.description}</p>
-               </section>
-            </Detail>
-            <Buy>
-               <small>
-                  {p.item.condition} - {p.item.sold_quantity} vendidos
-               </small>
-               <strong>{p.item.title}</strong>
-               <p>{renderPrice(p.item.price.decimals)}</p>
-               <button type="button">Comprar</button>
-            </Buy>
+            <Navigation paths={product.item.path ? product.item.path : ''} />
+            <Container>
+               <Detail>
+                  <img src={p.item.picture} alt={p.item.title} />
+                  <section>
+                     <strong>Detalhes do Produto</strong>
+                     <p>{p.item.description}</p>
+                  </section>
+               </Detail>
+               <Buy>
+                  <small>
+                     {p.item.condition} - {p.item.sold_quantity} vendidos
+                  </small>
+                  <strong>{p.item.title}</strong>
+                  {renderPrice(p.item.price.decimals)}
+                  <button type="button">Comprar</button>
+               </Buy>
+            </Container>
          </>
       );
    }
 
    return (
       <MainContainer>
-         <Navigation />
-         <Container>
-            {failure.status
-               ? renderError()
-               : isloading
-               ? renderLoading()
-               : renderProduct(product)}
-         </Container>
+         {failure.status
+            ? renderError()
+            : isloading
+            ? renderLoading()
+            : renderProduct(product)}
       </MainContainer>
    );
 }

@@ -9,14 +9,13 @@ export const Container = styled.div`
 
    a {
       text-decoration: none;
+      color: black;
 
       &:active,
       &:focus,
       &:visited {
          color: black;
       }
-
-      &: ;
    }
 `;
 
@@ -24,6 +23,12 @@ export const Product = styled.div`
    display: flex;
    padding: 16px;
    transition: all 0.2s;
+
+   @media (max-width: 600px) {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+   }
 
    &:hover {
       transform: scale(1.02);
@@ -46,6 +51,11 @@ export const Product = styled.div`
          padding: 0px;
          margin: 0px;
 
+         @media (max-width: 600px) {
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+         }
          span {
             font-size: 24px;
          }
@@ -68,5 +78,5 @@ export const Product = styled.div`
 export const Description = styled.p`
    font-size: 18px;
    max-width: 350px;
-   margin-top: 32px;
+   margin-top: 16px;
 `;

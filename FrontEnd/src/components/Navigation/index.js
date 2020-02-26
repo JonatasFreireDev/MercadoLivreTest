@@ -1,17 +1,27 @@
 import React from 'react';
 import { MdKeyboardArrowRight } from 'react-icons/md';
 
+import PropTypes from 'prop-types';
+
 import { Container } from './styles';
 
-const paths = ['Eletronica', 'Ipod', 'Repro', 'Ipod Touch', '32 gb'];
-
-export default function Navigation() {
+export default function Navigation({ paths }) {
    const pathLink = paths.map((path, index) => (
       <>
-         <a href="#">{path}</a>
+         <a href="/" key={path}>
+            {path}
+         </a>
          {index === paths.length - 1 ? '' : <MdKeyboardArrowRight />}
       </>
    ));
 
    return <Container>{pathLink}</Container>;
 }
+
+Navigation.propTypes = {
+   paths: PropTypes.instanceOf(Array),
+};
+
+Navigation.defaultProps = {
+   paths: [''],
+};
