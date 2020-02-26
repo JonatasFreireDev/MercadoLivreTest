@@ -10,20 +10,23 @@ Confesso que foi um tanto desafiador realizar a parte de buscas, a qual funciona
 
 # Rodando em seu computador
 
-Basicamente, após clonar o repositório, basta apenas entrar na pasta BackEnd via terminal e executar o seguinte comando:
+Basicamente, após clonar o repositório, basta apenas executar os seguintes comandos:
 
 ```sh
 $ cd BackEnd
+$ yarn
 $ yarn dev
 ```
 
-Então, abra outra aba no seu terminal, entre na pasta FrontEnd e execute:
+Então, abra outra aba no seu terminal, entre na do projeto e execute:
 
 ```sh
 $ cd FrontEnd
+$ yarn
 $ yarn start
 ```
 
+O comando yarn citado acima, é apenas para atualizar as dependencias do projeto.
 Pronto! agora é só acessar localhost:3000 em seu navegador e dar uma olhadinha :)
 
 <p align="center">
