@@ -7,12 +7,10 @@ import { Container } from './styles';
 
 export default function Navigation({ paths }) {
    const pathLink = paths.map((path, index) => (
-      <>
-         <a href="/" key={path}>
-            {path}
-         </a>
+      <span key={path}>
+         <a href="/">{path}</a>
          {index === paths.length - 1 ? '' : <MdKeyboardArrowRight />}
-      </>
+      </span>
    ));
 
    return <Container>{pathLink}</Container>;

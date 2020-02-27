@@ -50,26 +50,24 @@ export default function ResultsSearch() {
    function renderSearch(product, index) {
       return (
          <>
-            <Link key={product.id} to={`/items/${product.id}`}>
-               <Product>
-                  <img src={product.picture} alt={product.id} />
+            <Product>
+               <img src={product.picture} alt={product.id} />
+               <div>
                   <div>
-                     <div>
-                        <span>
-                           $ {product.price.decimals.toLocaleString('pt-BR')}
-                        </span>
-                        {product.free_shiping ? (
-                           <img src={shipping} alt={product.id} />
-                        ) : (
-                           ''
-                        )}
-                     </div>
-                     <Description>{product.title}</Description>
+                     <span>
+                        $ {product.price.decimals.toLocaleString('pt-BR')}
+                     </span>
+                     {product.free_shiping ? (
+                        <img src={shipping} alt={product.id} />
+                     ) : (
+                        ''
+                     )}
                   </div>
-                  <small>{product.city}</small>
-               </Product>
-               {index === products.length - 1 ? '' : <hr />}
-            </Link>
+                  <Description>{product.title}</Description>
+               </div>
+               <small>{product.city}</small>
+            </Product>
+            {index === products.length - 1 ? '' : <hr />}
          </>
       );
    }
@@ -82,7 +80,11 @@ export default function ResultsSearch() {
                ? renderError()
                : isloading
                ? renderLoading()
-               : products.map((product, index) => renderSearch(product, index))}
+               : products.map((product, index) => (
+                    <Link key={product.id} to={`/items/${product.id}`}>
+                       {renderSearch(product, index)}
+                    </Link>
+                 ))}
          </Container>
       </MainContainer>
    );
