@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 
 import PropTypes from 'prop-types';
 
@@ -11,7 +11,7 @@ import api from '~/services/api';
 import { Container, Detail, Buy, Price } from './styles';
 
 export default function ProductDetail({ match }) {
-   const [product, setProduct] = useState({});
+   const [product, setProduct] = useState();
    const [isloading, setIsLoading] = useState(true);
    const [failure, setFailure] = useState({ status: false, message: '' });
 
@@ -38,6 +38,13 @@ export default function ProductDetail({ match }) {
       // eslint-disable-next-line react-hooks/exhaustive-deps
    }, []);
 
+   const mainPath = useMemo(() => {
+      if (product) {
+         return [...product.item.path];
+      }
+      return ['Buscando...'];
+   }, [product]);
+
    function renderError() {
       return <ErrorMessage message={failure.message} />;
    }
@@ -59,35 +66,35 @@ export default function ProductDetail({ match }) {
    function renderProduct(p) {
       return (
          <>
-            <Navigation paths={product.item.path ? product.item.path : ''} />
-            <Container>
-               <Detail>
-                  <img src={p.item.picture} alt={p.item.title} />
-                  <section>
-                     <strong>Detalhes do Produto</strong>
-                     <p>{p.item.description}</p>
-                  </section>
-               </Detail>
-               <Buy>
-                  <small>
-                     {p.item.condition} - {p.item.sold_quantity} vendidos
-                  </small>
-                  <strong>{p.item.title}</strong>
-                  {renderPrice(p.item.price.decimals)}
-                  <button type="button">Comprar</button>
-               </Buy>
-            </Container>
+            <Detail>
+               <img src={p.item.picture} alt={p.item.title} />
+               <section>
+                  <strong>Detalhes do Produto</strong>
+                  <p>{p.item.description}</p>
+               </section>
+            </Detail>
+            <Buy>
+               <small>
+                  {p.item.condition} - {p.item.sold_quantity} vendidos
+               </small>
+               <strong>{p.item.title}</strong>
+               {renderPrice(p.item.price.decimals)}
+               <button type="button">Comprar</button>
+            </Buy>
          </>
       );
    }
 
    return (
       <MainContainer>
-         {failure.status
-            ? renderError()
-            : isloading
-            ? renderLoading()
-            : renderProduct(product)}
+         <Navigation paths={mainPath} />
+         <Container>
+            {failure.status
+               ? renderError()
+               : isloading
+               ? renderLoading()
+               : renderProduct(product)}
+         </Container>
       </MainContainer>
    );
 }
