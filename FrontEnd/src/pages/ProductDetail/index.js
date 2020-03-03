@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 import PropTypes from 'prop-types';
 
@@ -7,13 +8,15 @@ import Loading from '~/components/Loading';
 import { MainContainer } from '~/components/MainContainer/styles';
 import Navigation from '~/components/Navigation';
 import api from '~/services/api';
+import * as FavoriteActions from '~/store/modules/favorites/actions';
 
-import { Container, Detail, Buy, Price } from './styles';
+import { Container, Detail, Buy, Price, Icon } from './styles';
 
 export default function ProductDetail({ match }) {
    const [product, setProduct] = useState();
    const [isloading, setIsLoading] = useState(true);
    const [failure, setFailure] = useState({ status: false, message: '' });
+   const dispatch = useDispatch();
 
    useEffect(() => {
       const { id } = match.params;
@@ -25,7 +28,7 @@ export default function ProductDetail({ match }) {
             });
 
             const { author, item } = resp.data;
-            setProduct({ author, item });
+            setProduct({ id, author, item });
 
             setIsLoading(false);
          } catch (err) {
@@ -37,6 +40,19 @@ export default function ProductDetail({ match }) {
       loadProduct();
       // eslint-disable-next-line react-hooks/exhaustive-deps
    }, []);
+
+   const fav = useSelector(state =>
+      state.favorites.find(p => {
+         if (product) {
+            return p.id === product.id;
+         }
+         return null;
+      })
+   );
+
+   function handleToggleFavorite(id) {
+      dispatch(FavoriteActions.addRequestFavorite(id));
+   }
 
    const mainPath = useMemo(() => {
       if (product) {
@@ -74,9 +90,17 @@ export default function ProductDetail({ match }) {
                </section>
             </Detail>
             <Buy>
-               <small>
-                  {p.item.condition} - {p.item.sold_quantity} vendidos
-               </small>
+               <div>
+                  <small>
+                     {p.item.condition} - {p.item.sold_quantity} vendidos
+                  </small>
+                  <Icon
+                     onClick={() => {
+                        handleToggleFavorite(p.id);
+                     }}
+                     favorite={fav ? 'true' : undefined}
+                  />
+               </div>
                <strong>{p.item.title}</strong>
                {renderPrice(p.item.price.decimals)}
                <button type="button">Comprar</button>

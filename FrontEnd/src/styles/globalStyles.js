@@ -28,4 +28,16 @@ export default createGlobalStyle`
       border-color: ${grey_light};
       margin: 0 25px;
       color: red;
+   }
+
+   a {
+      text-decoration: none;
+      color: black;
+
+      &:active,
+      &:focus,
+      &:visited {
+         color: black;
+      }
+   }
 `;

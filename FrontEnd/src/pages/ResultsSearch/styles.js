@@ -6,17 +6,6 @@ export const Container = styled.div`
    background: ${white};
    border-radius: 4px;
    margin-bottom: 50px;
-
-   a {
-      text-decoration: none;
-      color: black;
-
-      &:active,
-      &:focus,
-      &:visited {
-         color: black;
-      }
-   }
 `;
 
 export const Product = styled.div`

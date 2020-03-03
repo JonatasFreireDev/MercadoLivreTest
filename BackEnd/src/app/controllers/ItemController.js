@@ -49,6 +49,7 @@ class ItemController {
          const [name, lastname] = getPartialName(resp_seller.data.nickname);
 
          return res.json({
+            id,
             author: {
                name,
                lastname,
