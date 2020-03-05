@@ -8,12 +8,13 @@ import { MainContainer } from '~/components/MainContainer/styles';
 import Navigation from '~/components/Navigation';
 import api from '~/services/api';
 
-import { Container, Product, Description } from './styles';
+import { Container, Product, Description, Pagination } from './styles';
 
 export default function ResultsSearch() {
    const [products, setProducts] = useState([]);
    const [isloading, setIsLoading] = useState(true);
    const [failure, setFailure] = useState({ status: false, message: '' });
+   const [page, setPage] = useState(0);
 
    const URL = new URLSearchParams(useLocation().search).get('search');
 
@@ -22,9 +23,11 @@ export default function ResultsSearch() {
 
       async function loadProduct() {
          try {
-            const resp = await api.get(`/items?search=${URL}`).catch(() => {
-               throw new Error('Não foi encontrado nenhum produto');
-            });
+            const resp = await api
+               .get(`/items?search=${URL}&page=${page}`)
+               .catch(() => {
+                  throw new Error('Não foi encontrado nenhum produto');
+               });
 
             const [...searchs] = resp.data;
 
@@ -37,7 +40,7 @@ export default function ResultsSearch() {
       }
 
       loadProduct();
-   }, [URL]);
+   }, [URL, page]);
 
    function renderError() {
       return <ErrorMessage message={failure.message} />;
@@ -85,6 +88,28 @@ export default function ResultsSearch() {
                        {renderSearch(product, index)}
                     </Link>
                  ))}
+            <Pagination>
+               <button
+                  type="button"
+                  onClick={() => {
+                     window.scrollTo(0, 0);
+                     setPage(page - 1);
+                  }}
+                  disabled={page <= 0}
+               >
+                  Anterior
+               </button>
+               <span>{page + 1}</span>
+               <button
+                  type="button"
+                  onClick={() => {
+                     window.scrollTo(0, 0);
+                     setPage(page + 1);
+                  }}
+               >
+                  Próximo
+               </button>
+            </Pagination>
          </Container>
       </MainContainer>
    );

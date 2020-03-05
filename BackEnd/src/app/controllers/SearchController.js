@@ -3,15 +3,12 @@ import getPartialName from '../../util/name';
 
 class ItemController {
    async index(req, res) {
-      const { search } = req.query;
+      const { search, page = 0 } = req.query;
+      const limit = 5;
 
       try {
          const resp = await api
-            .get(`/sites/MLA/search?q=${search}`, {
-               params: {
-                  limit: 4,
-               },
-            })
+            .get(`/sites/MLA/search?q=${search}`)
             .catch(() => {
                throw new Error('Product does not found');
             });
@@ -22,8 +19,10 @@ class ItemController {
 
          const { results } = resp.data;
 
+         const resu = results.slice(page * limit, page * limit + limit);
+
          // Remove items duplicados
-         const newResults = [...new Set(results)];
+         const newResults = [...new Set(resu)];
 
          // Buscando a categoria e author de cada produto atravez da api
          const responseCategory = await Promise.all(
