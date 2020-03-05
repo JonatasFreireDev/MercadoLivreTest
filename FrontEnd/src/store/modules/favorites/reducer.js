@@ -7,7 +7,7 @@ export default function favorites(state = INIT_STATE, action) {
       switch (action.type) {
          case '@favorite/ADD_FAVORITE_SUCCESS': {
             const { product } = action.payload;
-            draft.push(product);
+            draft.unshift(product);
             break;
          }
          case '@favorite/REMOVE_FAVORITE_REQUEST': {

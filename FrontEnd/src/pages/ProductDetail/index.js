@@ -9,6 +9,7 @@ import { MainContainer } from '~/components/MainContainer/styles';
 import Navigation from '~/components/Navigation';
 import api from '~/services/api';
 import * as FavoriteActions from '~/store/modules/favorites/actions';
+import * as VisitsActions from '~/store/modules/visits/actions';
 
 import { Container, Detail, Buy, Price, Icon } from './styles';
 
@@ -17,6 +18,15 @@ export default function ProductDetail({ match }) {
    const [isloading, setIsLoading] = useState(true);
    const [failure, setFailure] = useState({ status: false, message: '' });
    const dispatch = useDispatch();
+
+   const fav = useSelector(state =>
+      state.favorites.find(p => {
+         if (product) {
+            return p.id === product.id;
+         }
+         return null;
+      })
+   );
 
    useEffect(() => {
       const { id } = match.params;
@@ -28,7 +38,9 @@ export default function ProductDetail({ match }) {
             });
 
             const { author, item } = resp.data;
+
             setProduct({ id, author, item });
+            dispatch(VisitsActions.addRequestVisit(id));
 
             setIsLoading(false);
          } catch (err) {
@@ -40,15 +52,6 @@ export default function ProductDetail({ match }) {
       loadProduct();
       // eslint-disable-next-line react-hooks/exhaustive-deps
    }, []);
-
-   const fav = useSelector(state =>
-      state.favorites.find(p => {
-         if (product) {
-            return p.id === product.id;
-         }
-         return null;
-      })
-   );
 
    function handleToggleFavorite(id) {
       dispatch(FavoriteActions.addRequestFavorite(id));

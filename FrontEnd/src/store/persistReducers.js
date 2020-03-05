@@ -6,7 +6,7 @@ export default reducers => {
       {
          key: 'mercadoL',
          storage,
-         whitelist: ['favorites'],
+         whitelist: ['favorites', 'visits'],
       },
       reducers
    );

@@ -1,22 +1,32 @@
 import React from 'react';
-import { MdFavoriteBorder } from 'react-icons/md';
+import { MdFavoriteBorder, MdInsertEmoticon } from 'react-icons/md';
 import { useSelector } from 'react-redux';
 
 import List from '~/components/List';
 import { MainContainer } from '~/components/MainContainer/styles';
 import Navigation from '~/components/Navigation';
 
-import { Container, NoFavorite } from './styles';
+import { Container, EmptyList } from './styles';
 
 export default function Search() {
-   const hearts = useSelector(state => state.favorites);
+   const favorites = useSelector(state => state.favorites);
+   const visits = useSelector(state => state.visits);
 
-   function ShowEmpty() {
+   function ShowEmptyVisits() {
       return (
-         <NoFavorite>
-            <p>Adicione algum item !</p>
+         <EmptyList>
+            <p>Visualize os produtos para adicionar aqui !</p>
+            <MdInsertEmoticon size={50} />
+         </EmptyList>
+      );
+   }
+
+   function ShowEmptyFavorite() {
+      return (
+         <EmptyList>
+            <p>Adicione algum item aos favoritos!</p>
             <MdFavoriteBorder size={50} />
-         </NoFavorite>
+         </EmptyList>
       );
    }
 
@@ -24,10 +34,17 @@ export default function Search() {
       <MainContainer>
          <Navigation paths={['Home']} />
          <Container>
+            <hr />
             <List
-               items={hearts}
+               items={visits}
+               nameList="Mais Visitados"
+               emptyMessage={<ShowEmptyVisits />}
+            />
+            <hr />
+            <List
+               items={favorites}
                nameList="Favoritos"
-               emptyMessage={<ShowEmpty />}
+               emptyMessage={<ShowEmptyFavorite />}
             />
          </Container>
       </MainContainer>
