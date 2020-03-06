@@ -21,6 +21,10 @@ export const ListItems = styled.div`
    & > div {
       width: 90%;
 
+      @media (max-width: 600px) {
+         width: 80%;
+      }
+
       & > button,
       & > button:focus,
       & > button:active,

@@ -8,6 +8,16 @@ O App foi construído em ReactJS e NodeJS, o backend construído faz uma busca a
 
 Confesso que foi um tanto desafiador realizar a parte de buscas, a qual funciona tanto pela barra quanto pelo url, quebrei a cabeça pra descobrir como passar parâmetros de um componente para outro através de query params.
 
+## Novas features !
+
+Novas features foram adicionadas para complementar a aplicação como um todo a partir do commit 21.
+
+- Agora é possivel adicionar itens aos favoritos, estes itens sao visualizados na pagina principal.
+- Cada item visualizado é acrescentado a lista "Mais Visitados" na pagina inicial, com no maximo de 9 items
+- Ao fazer uma pesquisa, é possivel navegar por varias páginas, não sendo mais limitado como antes.
+- Temos um carousel main na pagina principal, no qual exibe itens aleatorios com base no ultimo item visualizado !
+- Ajustado alguns bugs encontrados.
+
 # Rodando em seu computador
 
 Basicamente, após clonar o repositório, basta apenas executar os seguintes comandos:

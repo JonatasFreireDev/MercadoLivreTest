@@ -1,3 +1,4 @@
+import { darken } from 'polished';
 import styled from 'styled-components';
 
 import { white, grey } from '~/styles/colors';
@@ -45,6 +46,7 @@ export const Product = styled.div`
             align-items: center;
             width: 100%;
          }
+
          span {
             font-size: 24px;
          }
@@ -80,6 +82,7 @@ export const Pagination = styled.div`
       font-family: Arial, Helvetica, sans-serif;
       font-size: 14px;
       color: #050505;
+      background: #f2f2f2;
       padding: 5px 10px;
       border-radius: 5px;
       border: 1px solid #949494;
@@ -87,10 +90,15 @@ export const Pagination = styled.div`
          inset 0px 0px 2px rgba(255, 255, 255, 1);
       text-shadow: 0px -1px 0px rgba(000, 000, 000, 0.2),
          0px 1px 0px rgba(255, 255, 255, 1);
+      transition: background 0.3s;
 
       &:disabled {
          cursor: not-allowed;
          opacity: 0.5;
+      }
+
+      &:hover {
+         background: ${darken(0.05, '#f2f2f2')};
       }
    }
 `;

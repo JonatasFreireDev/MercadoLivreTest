@@ -88,28 +88,33 @@ export default function ResultsSearch() {
                        {renderSearch(product, index)}
                     </Link>
                  ))}
-            <Pagination>
-               <button
-                  type="button"
-                  onClick={() => {
-                     window.scrollTo(0, 0);
-                     setPage(page - 1);
-                  }}
-                  disabled={page <= 0}
-               >
-                  Anterior
-               </button>
-               <span>{page + 1}</span>
-               <button
-                  type="button"
-                  onClick={() => {
-                     window.scrollTo(0, 0);
-                     setPage(page + 1);
-                  }}
-               >
-                  Próximo
-               </button>
-            </Pagination>
+            {!failure.status ? (
+               <Pagination>
+                  <button
+                     type="button"
+                     onClick={() => {
+                        window.scrollTo(0, 0);
+                        setPage(page - 1);
+                     }}
+                     disabled={page <= 0 || isloading}
+                  >
+                     Anterior
+                  </button>
+                  <span>{page + 1}</span>
+                  <button
+                     type="button"
+                     onClick={() => {
+                        window.scrollTo(0, 0);
+                        setPage(page + 1);
+                     }}
+                     disabled={isloading}
+                  >
+                     Próximo
+                  </button>
+               </Pagination>
+            ) : (
+               ``
+            )}
          </Container>
       </MainContainer>
    );

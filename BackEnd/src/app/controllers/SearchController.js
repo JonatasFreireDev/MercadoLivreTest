@@ -1,9 +1,10 @@
 import api from '../../services/api';
 import getPartialName from '../../util/name';
+import rand from '../../util/random';
 
 class ItemController {
    async index(req, res) {
-      const { search, page = 0 } = req.query;
+      const { search, page = 0, random } = req.query;
       const limit = 5;
 
       try {
@@ -19,7 +20,14 @@ class ItemController {
 
          const { results } = resp.data;
 
-         const resu = results.slice(page * limit, page * limit + limit);
+         let resu;
+
+         // se random for true, consulta produtos aleatorios... se nao, consulta por paginas
+         if (random) {
+            resu = rand(results, 5);
+         } else {
+            resu = results.slice(page * limit, page * limit + limit);
+         }
 
          // Remove items duplicados
          const newResults = [...new Set(resu)];

@@ -32,6 +32,8 @@ export default function ProductDetail({ match }) {
       const { id } = match.params;
 
       async function loadProduct() {
+         window.scrollTo(0, 0);
+
          try {
             const resp = await api.get(`/items/${id}`).catch(() => {
                throw new Error('Produto não encontrado');

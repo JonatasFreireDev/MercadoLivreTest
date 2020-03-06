@@ -18,7 +18,7 @@ function renderPrice(value, type = '$') {
    );
 }
 
-function renderItemFavorites(f) {
+function renderItems(f) {
    return (
       <>
          <img src={f.item.picture} alt={f.id} />
@@ -65,7 +65,7 @@ export default function RenderList({
                ]}
             >
                {items.map(item => (
-                  <Item key={item.id}>{renderItemFavorites(item)}</Item>
+                  <Item key={item.id}>{renderItems(item)}</Item>
                ))}
             </Slider>
          ) : (
@@ -78,5 +78,5 @@ export default function RenderList({
 RenderList.propTypes = {
    items: PropTypes.instanceOf(Array).isRequired,
    nameList: PropTypes.string,
-   emptyMessage: PropTypes.func,
+   emptyMessage: PropTypes.instanceOf(Object),
 };

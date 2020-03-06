@@ -2,8 +2,10 @@ import styled from 'styled-components';
 
 import { white } from '~/styles/colors';
 
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+
 export const Container = styled.div`
-   padding: 10px;
    display: flex;
    justify-content: center;
    align-items: center;
